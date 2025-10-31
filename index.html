@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landscaping Estimator</title>
+  <style>
+    body { 
+      margin: 0; 
+      font-family: Arial, sans-serif; 
+      background: linear-gradient(135deg, #0a1a3a, #021028); 
+      color: #fff; 
+      text-align: center; 
+      padding: 20px;
+    }
+    h1 { margin-bottom: 30px; }
+    input[type="file"] { display: none; }
+    label { 
+      background-color: #00bfff; 
+      padding: 12px 20px; 
+      border-radius: 5px; 
+      cursor: pointer; 
+      font-weight: bold; 
+      transition: background 0.3s;
+    }
+    label:hover { background-color: #0099cc; }
+    #previewCanvas { 
+      margin-top: 30px; 
+      border: 2px solid #00bfff; 
+      max-width: 100%; 
+      height: auto; 
+      background-color: #000; 
+    }
+  </style>
+</head>
+<body>
+  <h1>Upload Your Yard Photo</h1>
+  <label for="photoUpload">Choose Photo</label>
+  <input type="file" id="photoUpload" accept="image/*">
+  <canvas id="previewCanvas"></canvas>
+
+  <script>
+    const input = document.getElementById('photoUpload');
+    const canvas = document.getElementById('previewCanvas');
+    const ctx = canvas.getContext('2d');
+
+    input.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = new Image();
+          img.onload = function() {
+            canvas.width = img.width;
+            canvas.height = img.height;
+            ctx.drawImage(img, 0, 0);
+          }
+          img.src = e.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>
