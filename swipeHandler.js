@@ -29,11 +29,17 @@ function handleTouchEnd() {
 }
 
 function handleSwipeLeft() {
-  // Add your left-swipe action here (e.g., move to next icon)
+    const panel = document.querySelector('.panel'); // replace with your actual panel class or id
+    const targetPosition = calculateLeftPosition(); // your logic here
+    panel.style.transform = `translateX(${targetPosition}px)`;
+    panel.style.transition = 'transform 0.3s ease';
 }
 
 function handleSwipeRight() {
-  // Add your right-swipe action here (e.g., move to previous icon)
+    const panel = document.querySelector('.panel'); // replace with your actual panel class or id
+    const targetPosition = calculateRightPosition(); // your logic here
+    panel.style.transform = `translateX(${targetPosition}px)`;
+    panel.style.transition = 'transform 0.3s ease';
 }
 
 document.addEventListener("touchstart", handleTouchStart, false);
